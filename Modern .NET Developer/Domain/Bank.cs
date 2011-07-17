@@ -10,7 +10,6 @@ namespace Modern.NETDeveloper.Domain
         private IList<Customer> _customers;
         private IList<string> _nicknames;
 
-
         public Bank()
         {
             _customers = new List<Customer>();
