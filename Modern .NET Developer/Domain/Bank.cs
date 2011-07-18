@@ -18,10 +18,11 @@ namespace Modern.NETDeveloper.Domain
 
         public Customer AddCustomer(string nickname, DateTime dateOfBirth)
         {
-            if (string.IsNullOrEmpty(nickname))
+            var nicknameValidator = new NicknameValidator();
+            if (!nicknameValidator.Validate(nickname))
                 return null;
 
-            if (_nicknames.Contains(nickname))
+            if (!ValidateDuplicatedNickname(nickname))
                 return null;
            
             var newCustomer = new Customer(nickname, dateOfBirth);
@@ -30,5 +31,18 @@ namespace Modern.NETDeveloper.Domain
             return newCustomer;
         }
 
+        private bool ValidateDuplicatedNickname(string nickname)
+        {
+            return !_nicknames.Contains(nickname);
+        }
+
+    }
+
+    public class NicknameValidator
+    {
+        public bool Validate(string nickname)
+        {
+            return !string.IsNullOrEmpty(nickname);
+        }
     }
 }

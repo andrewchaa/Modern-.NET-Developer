@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Domain\Bank.cs" />
     <Compile Include="Domain\Customer.cs" />
+    <Compile Include="Domain\NicknameValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

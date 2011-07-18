@@ -15,5 +15,14 @@ namespace Test
 
             Assert.That(customer, Is.Not.Null);
         }
+
+        [Test]
+        public void ShouldReturnNullIfNicknameIsNull()
+        {
+            var bank = new Bank();
+            var customer = bank.AddCustomer(null, new DateTime(1971, 1, 1));
+
+            Assert.That(customer, Is.Null);
+        }
     }
 }
