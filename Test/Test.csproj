@@ -47,6 +47,12 @@
     <Compile Include="BankTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modern .NET Developer\Modern.NETDeveloper.csproj">
+      <Project>{DE61754F-179F-4E3F-8BDE-C4927C328DBD}</Project>
+      <Name>Modern.NETDeveloper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

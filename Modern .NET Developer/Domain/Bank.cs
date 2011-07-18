@@ -13,6 +13,7 @@ namespace Modern.NETDeveloper.Domain
         public Bank()
         {
             _customers = new List<Customer>();
+            _nicknames = new List<string>();
         }
 
         public Customer AddCustomer(string nickname, DateTime dateOfBirth)
