@@ -1,6 +1,6 @@
 ﻿namespace Modern.NETDeveloper.Domain
 {
-    public class EmptyNicknameValidator
+    public class EmptyNicknameValidator : IValidator
     {
         public bool Validate(string nickname)
         {

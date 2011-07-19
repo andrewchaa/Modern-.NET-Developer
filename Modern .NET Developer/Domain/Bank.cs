@@ -18,11 +18,11 @@ namespace Modern.NETDeveloper.Domain
 
         public Customer AddCustomer(string nickname, DateTime dateOfBirth)
         {
-            var emptyNicknameValidator = new EmptyNicknameValidator();
+            IValidator emptyNicknameValidator = new EmptyNicknameValidator();
             if (!emptyNicknameValidator.Validate(nickname))
                 return null;
 
-            var duplicatedNicknameValidator = new DuplicatedNicknameValidator(_nicknames);
+            IValidator duplicatedNicknameValidator = new DuplicatedNicknameValidator(_nicknames);
             if (!duplicatedNicknameValidator.Validate(nickname))
                 return null;
            

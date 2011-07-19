@@ -2,7 +2,7 @@
 
 namespace Modern.NETDeveloper.Domain
 {
-    public class DuplicatedNicknameValidator
+    public class DuplicatedNicknameValidator : IValidator
     {
         private readonly IList<string> _nicknames;
 
