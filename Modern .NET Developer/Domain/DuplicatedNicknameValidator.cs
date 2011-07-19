@@ -1,19 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Modern.NETDeveloper.Domain
 {
-    public class DuplicatedNicknameValidator : INicknameValidator
+    public class DuplicatedNicknameValidator : IDuplicatedNicknameValidator
     {
-        private readonly IList<string> _nicknames;
-
-        public DuplicatedNicknameValidator(IList<string> nicknames)
+        public bool Validate(string nickname, IList<string> nicknames)
         {
-            _nicknames = nicknames;
+            return !nicknames.Contains(nickname);
         }
+    }
 
-        public bool Validate(string nickname)
-        {
-            return !_nicknames.Contains(nickname);
-        }
+    public interface IDuplicatedNicknameValidator
+    {
+        bool Validate(string nickname, IList<string> nicknames);
     }
 }

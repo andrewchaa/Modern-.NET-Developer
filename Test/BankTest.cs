@@ -10,7 +10,7 @@ namespace Test
         [Test]
         public void ShouldAddCustomerNickname()
         {
-            var bank = new Bank();
+            var bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator());
             var customer = bank.AddCustomer("andy", new DateTime(1971, 1, 1));
 
             Assert.That(customer, Is.Not.Null);
@@ -19,7 +19,7 @@ namespace Test
         [Test]
         public void ShouldReturnNullIfNicknameIsNull()
         {
-            var bank = new Bank();
+            var bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator());
             var customer = bank.AddCustomer(null, new DateTime(1971, 1, 1));
 
             Assert.That(customer, Is.Null);
