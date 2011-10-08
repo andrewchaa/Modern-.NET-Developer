@@ -14,7 +14,7 @@ namespace Test
             var customer = bank.AddCustomer("Andy", new DateTime(1981, 01, 01));
 
             customer.Deposit(100);
-            int balance = customer.GetBanalce();
+            decimal balance = customer.GetBanalce();
 
             Assert.That(balance, Is.EqualTo(100));
         }

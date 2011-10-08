@@ -5,17 +5,22 @@ namespace Modern.NETDeveloper.Domain
 {
     public class Customer
     {
+        private decimal _balance;
+        private string _nickname;
+        private DateTime _dateOfBirth;
+
         public Customer(string nickname, DateTime dateOfBirth)
         {
-            
+            _nickname = nickname;
+            _dateOfBirth = dateOfBirth;
         }
 
-        public void Deposit(int amount)
+        public void Deposit(decimal amount)
         {
-            
+            _balance += amount;
         }
 
-        public int GetBanalce()
+        public decimal GetBanalce()
         {
             return 100;
         }
