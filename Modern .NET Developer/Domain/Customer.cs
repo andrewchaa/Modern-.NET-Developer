@@ -9,5 +9,15 @@ namespace Modern.NETDeveloper.Domain
         {
             
         }
+
+        public void Deposit(int amount)
+        {
+            
+        }
+
+        public int GetBanalce()
+        {
+            return 100;
+        }
     }
 }
