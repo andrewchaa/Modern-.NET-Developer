@@ -22,7 +22,12 @@ namespace Modern.NETDeveloper.Domain
 
         public decimal GetBanalce()
         {
-            return 100;
+            return _balance;
+        }
+
+        public void Withdraw(decimal amount)
+        {
+            _balance -= amount;
         }
     }
 }
