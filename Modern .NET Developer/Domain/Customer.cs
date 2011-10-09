@@ -6,14 +6,17 @@ namespace Modern.NETDeveloper.Domain
     public class Customer
     {
         private decimal _balance;
-        private string _nickname;
-        private DateTime _dateOfBirth;
 
-        public Customer(string nickname, DateTime dateOfBirth)
+        public Customer(string nickname, DateTime dateOfBirth, string email)
         {
-            _nickname = nickname;
-            _dateOfBirth = dateOfBirth;
+            Nickname = nickname;
+            DateOfBirth = dateOfBirth;
+            Email = email;
         }
+
+        public string Nickname { get; private set; }
+        public DateTime DateOfBirth { get; private set; }
+        public string Email { get; private set; }
 
         public void Deposit(decimal amount)
         {

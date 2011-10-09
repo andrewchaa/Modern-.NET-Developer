@@ -19,7 +19,7 @@ namespace Modern.NETDeveloper.Domain
             _nicknames = new List<string>();
         }
 
-        public Customer AddCustomer(string nickname, DateTime dateOfBirth)
+        public Customer AddCustomer(string nickname, DateTime dateOfBirth, string email)
         {
             if (!_emptyNicknameValidator.Validate(nickname))
                 return null;
@@ -27,7 +27,7 @@ namespace Modern.NETDeveloper.Domain
             if (!_duplicatedNicknameValidator.Validate(nickname, _nicknames))
                 return null;
            
-            var newCustomer = new Customer(nickname, dateOfBirth);
+            var newCustomer = new Customer(nickname, dateOfBirth, email);
             _customers.Add(newCustomer);
 
             return newCustomer;

@@ -13,7 +13,7 @@ namespace Test
         public void SetUp()
         {
             var bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator());
-            _customer = bank.AddCustomer("Andy", new DateTime(1981, 01, 01));
+            _customer = bank.AddCustomer("Andy", new DateTime(1981, 01, 01), "andy@gmail.com");
         }
 
         [Test]
