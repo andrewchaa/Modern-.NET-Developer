@@ -17,7 +17,7 @@ namespace Test
         }
 
         [Test]
-        public void ShouldDepositMoneyAndSeeItReflectInTheBalance()
+        public void CanDepositMoneyAndSeeItReflectInTheBalance()
         {
             _customer.Deposit(100);
             decimal balance = _customer.GetBanalce();
@@ -26,7 +26,7 @@ namespace Test
         }
 
         [Test]
-        public void ShouldWithdrawFromTheBalance()
+        public void CanWithdrawFromTheBalance()
         {
             _customer.Deposit(200);
             _customer.Withdraw(50);
@@ -36,7 +36,7 @@ namespace Test
         }
 
         [Test]
-        public void ShouldWithdrawAllTheMoney()
+        public void CanWithdrawAllTheMoney()
         {
             _customer.Deposit(500);
             _customer.Withdraw(500);
@@ -44,5 +44,15 @@ namespace Test
 
             Assert.That(balance, Is.EqualTo(0));
         }
+
+        [Test]
+        [ExpectedException(typeof(InsufficientFundsException))]
+        public void AttemptingToOverdrawWillResultInAnExceptionBeingThrown()
+        {
+            _customer.Deposit(100);
+            _customer.Withdraw(200);
+            
+        }
+
     }
 }

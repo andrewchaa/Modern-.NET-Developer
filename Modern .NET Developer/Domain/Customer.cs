@@ -27,6 +27,9 @@ namespace Modern.NETDeveloper.Domain
 
         public void Withdraw(decimal amount)
         {
+            if (_balance < amount)
+                throw new InsufficientFundsException();
+
             _balance -= amount;
         }
     }
