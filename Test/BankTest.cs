@@ -44,7 +44,9 @@ namespace Test
         [Test]
         public void AMessageIsSentToTheCustomerWhoWasAddedToTheBank()
         {
-            
+            var customer = _bank.AddCustomer("Andy", new DateTime(1981, 1, 1), "andy@gmail.com");
+
+
         }
     }
 
