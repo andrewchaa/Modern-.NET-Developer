@@ -1,4 +1,5 @@
 ﻿using System;
+using Com.ThoughtWorks.TDD;
 using NUnit.Framework;
 using Modern.NETDeveloper.Domain;
 
@@ -8,11 +9,13 @@ namespace Test
     public class CustomerTest
     {
         private Customer _customer;
+        private MessageGateway _messageGatewayStub;
 
         [SetUp]
         public void SetUp()
         {
-            var bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator());
+            _messageGatewayStub = new MessageGatewayStub();
+            var bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator(), _messageGatewayStub);
             _customer = bank.AddCustomer("Andy", new DateTime(1981, 01, 01), "andy@gmail.com");
         }
 
