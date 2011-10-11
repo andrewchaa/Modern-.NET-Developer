@@ -1,5 +1,7 @@
 ﻿using System;
+using Com.ThoughtWorks.TDD;
 using Modern.NETDeveloper.Domain;
+using Moq;
 using NUnit.Framework;
 
 namespace Test
@@ -44,12 +46,29 @@ namespace Test
         }
 
         [Test]
-        public void AMessageIsSentToTheCustomerWhoWasAddedToTheBank()
+        public void AMessageIsSentToTheCustomerWhoWasAddedToTheBankImplementedWithStub()
         {
             var customer = _bank.AddCustomer("Andy", new DateTime(1981, 1, 1), "andy@gmail.com");
 
-            Assert.That(_messageGateWayStub.Recipient, Is.EqualTo(customer.Nickname));
+            Assert.That(_messageGateWayStub.Recipient, Is.EqualTo(customer.Email));
             Assert.That(_messageGateWayStub.Content, Is.EqualTo("Dear Andy, welcome to the bank."));
         }
+
+        [Test]
+        public void AMessageIsSentToTheCustomerWhoWasAddedToTheBankImplementeWithMock()
+        {
+            string expectedRecipient = "andy@gmail.com";
+            string expectedContent = "Dear Andy, welcome to the bank.";
+
+            var mockGateway = new Mock<MessageGateway>();
+            mockGateway.Setup(x => x.Send(expectedRecipient, expectedContent));
+
+            var bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator(), mockGateway.Object);
+            var customer = bank.AddCustomer("Andy", new DateTime(1981, 1, 1), "andy@gmail.com");
+
+            mockGateway.VerifyAll();
+        }
+        
+            
     }
 }

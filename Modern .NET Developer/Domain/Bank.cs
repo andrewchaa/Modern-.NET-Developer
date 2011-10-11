@@ -33,7 +33,7 @@ namespace Modern.NETDeveloper.Domain
             var newCustomer = new Customer(nickname, dateOfBirth, email);
             _customers.Add(newCustomer);
 
-            _messageGateway.Send(newCustomer.Nickname, string.Format("Dear {0}, welcome to the bank.", newCustomer.Nickname));
+            _messageGateway.Send(newCustomer.Email, string.Format("Dear {0}, welcome to the bank.", newCustomer.Nickname));
 
             return newCustomer;
         }
