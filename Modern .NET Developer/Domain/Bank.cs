@@ -30,7 +30,7 @@ namespace Modern.NETDeveloper.Domain
             if (!_duplicatedNicknameValidator.Validate(nickname, _nicknames))
                 return null;
            
-            var newCustomer = new Customer(nickname, dateOfBirth, email);
+            var newCustomer = new Customer(nickname, dateOfBirth, email, DateTime.Today);
             _customers.Add(newCustomer);
 
             _messageGateway.Send(newCustomer.Email, string.Format("Dear {0}, welcome to the bank.", newCustomer.Nickname));

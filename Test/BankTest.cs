@@ -68,7 +68,38 @@ namespace Test
 
             mockGateway.VerifyAll();
         }
-        
+
+        [Test]
+        public void TheJoiningDateIsSetToTodaysDateAsSoonAsTheyAreAddedToTheBank()
+        {
+            var bank = BankBuilder.Build();
+            var customer = bank.AddCustomer("Hannah", new DateTime(1981, 1, 1), "hannah@gmail.com");
+
+            Assert.That(customer.JoinDate, Is.EqualTo(DateTime.Today));
+        }
+
+        [Test]
+        public void TheBonusIsAddedAfterTheTwoYearPeriodPasswedAndWhenCustomersMakeADeposit()
+        {
+            var bank = BankBuilder.Build();
+            var customer = bank.AddCustomer("Hannah", new DateTime(1981, 1, 1), "hannah@gmail.com");
+            customer.Deposit(100);
+
+            // times passes
+
+            customer.Deposit(100);
+            Assert.That(customer.GetBanalce(), Is.EqualTo(200 + 50));
+
+        }
             
+    }
+
+    public class BankBuilder
+    {
+        public static Bank Build()
+        {
+            return new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator(), 
+                new Mock<MessageGateway>().Object);
+        }
     }
 }
