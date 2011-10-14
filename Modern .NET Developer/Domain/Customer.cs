@@ -6,13 +6,17 @@ namespace Modern.NETDeveloper.Domain
     public class Customer
     {
         private decimal _balance;
+        private ISystemClock _systemClock;
+        private bool _isBonusPaid;
 
-        public Customer(string nickname, DateTime dateOfBirth, string email, DateTime joinDate)
+        public Customer(string nickname, DateTime dateOfBirth, string email, DateTime joinDate, ISystemClock systemClock)
         {
             Nickname = nickname;
             DateOfBirth = dateOfBirth;
             Email = email;
             JoinDate = joinDate;
+            
+            _systemClock = systemClock;
         }
 
         public string Nickname { get; private set; }
@@ -23,6 +27,11 @@ namespace Modern.NETDeveloper.Domain
         public void Deposit(decimal amount)
         {
             _balance += amount;
+            
+            if (!_isBonusPaid && _systemClock.Today().AddYears(-2) > JoinDate)
+            {
+                _balance += 50;
+            }
         }
 
         public decimal GetBanalce()

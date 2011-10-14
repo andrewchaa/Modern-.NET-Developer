@@ -52,6 +52,9 @@
     <Compile Include="Domain\EmptyNicknameValidator.cs" />
     <Compile Include="Domain\INicknameValidator.cs" />
     <Compile Include="Domain\InsufficientFundsException.cs" />
+    <Compile Include="Domain\ISystemClock.cs" />
+    <Compile Include="Domain\SystemClock.cs" />
+    <Compile Include="Domain\SystemTime.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

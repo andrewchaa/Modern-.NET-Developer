@@ -54,6 +54,7 @@
     <Compile Include="CustomerTest.cs" />
     <Compile Include="MessageGatewayStub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemClockStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Modern .NET Developer\Modern.NETDeveloper.csproj">

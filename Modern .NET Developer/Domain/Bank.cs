@@ -11,12 +11,15 @@ namespace Modern.NETDeveloper.Domain
         private readonly INicknameValidator _emptyNicknameValidator;
         private readonly IDuplicatedNicknameValidator _duplicatedNicknameValidator;
         private MessageGateway _messageGateway;
+        private readonly ISystemClock _systemClock;
 
-        public Bank(INicknameValidator emptyNicknameValidator, IDuplicatedNicknameValidator duplicatedNicknameValidator, MessageGateway messageGateway)
+        public Bank(INicknameValidator emptyNicknameValidator, IDuplicatedNicknameValidator duplicatedNicknameValidator, 
+            MessageGateway messageGateway, ISystemClock systemClock)
         {
             _emptyNicknameValidator = emptyNicknameValidator;
             _duplicatedNicknameValidator = duplicatedNicknameValidator;
             _messageGateway = messageGateway;
+            _systemClock = systemClock;
 
             _customers = new List<Customer>();
             _nicknames = new List<string>();
@@ -30,7 +33,8 @@ namespace Modern.NETDeveloper.Domain
             if (!_duplicatedNicknameValidator.Validate(nickname, _nicknames))
                 return null;
            
-            var newCustomer = new Customer(nickname, dateOfBirth, email, DateTime.Today);
+            //var newCustomer = new Customer(nickname, dateOfBirth, email, DateTime.Today);
+            var newCustomer = new Customer(nickname, dateOfBirth, email, _systemClock.Today(), _systemClock);
             _customers.Add(newCustomer);
 
             _messageGateway.Send(newCustomer.Email, string.Format("Dear {0}, welcome to the bank.", newCustomer.Nickname));
