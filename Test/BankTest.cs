@@ -16,8 +16,7 @@ namespace Test
         public void SetUp()
         {
             _messageGateWayStub = new MessageGatewayStub();
-            _bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator(), _messageGateWayStub,
-                             new SystemClock());
+            _bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator(), _messageGateWayStub);
         }
 
         [Test]
@@ -64,7 +63,7 @@ namespace Test
             var mockGateway = new Mock<MessageGateway>();
             mockGateway.Setup(x => x.Send(expectedRecipient, expectedContent));
 
-            var bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator(), mockGateway.Object, new SystemClock());
+            var bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator(), mockGateway.Object);
             var customer = bank.AddCustomer("Andy", new DateTime(1981, 1, 1), "andy@gmail.com");
 
             mockGateway.VerifyAll();
@@ -82,14 +81,13 @@ namespace Test
         [Test]
         public void TheBonusIsAddedAfterTheTwoYearPeriodPasswedAndWhenCustomersMakeADeposit()
         {
-            var systemColcoStub = new SystemClockStub(DateTime.Today);            
             var bank = new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator(),
-                                new MessageGatewayStub(), systemColcoStub);
+                                new MessageGatewayStub());
 
             var customer = bank.AddCustomer("Hannah", new DateTime(1981, 1, 1), "hannah@gmail.com");
             customer.Deposit(100);
 
-            systemColcoStub.TestToday = new DateTime(2020, 1, 1);
+            SystemTime.Today = () => new DateTime(2020, 1, 1);
 
             customer.Deposit(100);
             Assert.That(customer.GetBanalce(), Is.EqualTo(200 + 50));
@@ -103,7 +101,7 @@ namespace Test
         public static Bank Build()
         {
             return new Bank(new EmptyNicknameValidator(), new DuplicatedNicknameValidator(), 
-                new Mock<MessageGateway>().Object, new SystemClock());
+                new Mock<MessageGateway>().Object);
         }
     }
 }
